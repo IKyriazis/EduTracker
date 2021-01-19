@@ -22,7 +22,7 @@
     }
     .p1 {
         position: absolute;
-        width: 458px;
+        width: 600px;
         height: 36px;
 
         font-family: Roboto;
@@ -35,7 +35,7 @@
     .p2
     {
         position: absolute;
-        width: 530px;
+        width: 700px;
         height: 49px;
 
         font-family: Roboto;
@@ -47,7 +47,7 @@
     }
     .p3 {
         position: absolute;
-        width: 152px;
+        width: 300px;
         height: 30px;
 
         font-family: Roboto;
@@ -91,19 +91,30 @@
     <title>Student 1</title>
 </head>
 <body>
+    <script>
+        window.onload = () => {
+            fetch("/getNames", {
+            method: "GET"
+            }).then((result) => {
+            result.json().then(res => {
+                document.getElementById("student1").innerHTML = res.names[0];
+            });
+        });
+    }
+    </script>
     <h1 id="student1">res.names[0]</h1>
-    <br><br><br><br><p1>Average Response Duration: <p id="duration"></p></p1>
+    <br><br><br><br><p1>Response Duration: <p id="duration"></p></p1>
 
-    <br><br><p2>Average Word Count: <p id="wordCount"></p></p2>
+    <br><br><p2>Word Count: <p id="wordCount"></p></p2>
 
-    <br><br><p2>Average Responsiveness: <p id="responsiveness"></p></p2>
+    <br><br><p2>Responsiveness: <p id="responsiveness"></p></p2></p2>
 
-    <br><p id="keyphrases"></p>
+    <br><p2>Key Phrases: </p2><p id="keyphrases"></p>
 
     <br><br><p3>Creativity: <span id="demo"></span></p3>
     <div class="slidecontainer">
         <input type = "range" min="1" max="100" value="57" class="slider" id="creativeRange">
-        
+
     </div>
     <script>
         const key = document.getElementById("keyphrases");
@@ -120,8 +131,8 @@
             });
             fetch("/getStats").then(res => {
                 res.json().then(res => {
-                    responsiveness.innerText = res.speakerResponsiveness[0] * 100 + "%";
-                    duration.innerText = res.speakingTime[0] + "s";
+                    responsiveness.innerText = res.speakerResponsiveness[0] * 100 + " %";
+                    duration.innerText = res.speakingTime[0] + " s";
                     wordCount.innerText = res.wordCount[0];
                     key.innerText = res.key_phrases[0];
                 })
@@ -139,7 +150,7 @@
     <br><br><p3>Critical Thinking: <span id="demo1"></span></p3>
     <div class="slidecontainer">
         <input type = "range" min="1" max="100" value="50" class="slider" id="criticalRange">
-        
+
     </div>
 
     <script>
